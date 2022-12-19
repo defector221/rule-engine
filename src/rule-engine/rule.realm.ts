@@ -1,3 +1,3 @@
-export class RuleRealm{
-    merchantId: string
-}
+import { RuleModelRealm } from "./rule.model.realm";
+
+export class RuleRealm extends RuleModelRealm{}

@@ -5,17 +5,18 @@ import { RuleModelRealm } from "../rule.model.realm";
 import { RuleRealm } from "../rule.realm";
 
 @Injectable()
-export class FetchMerchantSetting<R extends RuleRealm, M extends RuleModelRealm> implements IRule<R, M>{
+export class CheckEligibilityForETB<R extends RuleRealm, M extends RuleModelRealm> implements IRule<R, M>{
     constructor(private _zestAdapterMediator: ZestAdapterMediatorService){}
     
     async evaluate(iRuleType: R, iRuleDTO: M) : Promise<M>{
-        const _merchantSettigs = await this._zestAdapterMediator.getMerchantSettings(iRuleType?.merchantId);
-        iRuleDTO?.setMerchantSettings(_merchantSettigs);
+        const merchantId = iRuleType.getMerchantID();
+        iRuleDTO.setCustomerEligibility(true);
         return iRuleDTO;
     }
 
-    async shouldRun(iRuleType: R): Promise<boolean> {
-        if(iRuleType?.merchantId && iRuleType?.merchantId.length != 0){
+    async shouldRun(iRuleType: R, iRuleDTO: M): Promise<boolean> {
+        const _merchantSettigs = iRuleDTO?.getMerchantSetting();
+        if(_merchantSettigs?.isBankBnplEnabled){
             return true;
         }
         return false;

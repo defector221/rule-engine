@@ -14,7 +14,7 @@ export class FetchMerchantSetting<R extends RuleRealm, M extends RuleModelRealm>
         return iRuleDTO;
     }
 
-    async shouldRun(iRuleType: R): Promise<boolean> {
+    async shouldRun(iRuleType: R, iRuleDTO: M): Promise<boolean> {
         if(iRuleType?.merchantId && iRuleType?.merchantId.length != 0){
             return true;
         }

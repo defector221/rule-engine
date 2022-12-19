@@ -25,7 +25,7 @@ export class RuleModelRealm{
         this.isCustomerEligibleForETB = eligibility;
     }
 
-    getCustomerEligibility(arg0: boolean) {
+    getCustomerEligibility() {
         return this.isCustomerEligibleForETB;
     }
 }

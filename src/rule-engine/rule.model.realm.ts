@@ -1,5 +1,13 @@
 export class RuleModelRealm{
-    
+    private _loanAmount: Number
+    getLoanAmount() {
+       return this._loanAmount;
+    }
+
+    setLoanAmount(amount: Number){
+        return this._loanAmount =  amount;
+    }
+
     private _merchantSettigs: any;
     
     setMerchantSettings(_merchantSettigs: any){
@@ -10,7 +18,7 @@ export class RuleModelRealm{
         return this._merchantSettigs;
     }
     
-    merchantId: string
+    private merchantId: string
 
     getMerchantID(){
         return this.merchantId;
@@ -20,12 +28,21 @@ export class RuleModelRealm{
         this.merchantId = mID;
     }
 
-    isCustomerEligibleForETB: boolean;
-    setCustomerEligibility(eligibility: boolean) {
+    private isCustomerEligibleForETB: boolean;
+    setCustomerEligibilityForETB(eligibility: boolean) {
         this.isCustomerEligibleForETB = eligibility;
     }
 
-    getCustomerEligibility() {
+    getCustomerEligibilityForETB() {
+        return this.isCustomerEligibleForETB;
+    }
+
+    private isCustomerEligibleForZest: boolean;
+    setCustomerEligibilityForZest(eligibility: boolean) {
+        this.isCustomerEligibleForZest = eligibility
+    }
+
+    getCustomerEligibilityForZest() {
         return this.isCustomerEligibleForETB;
     }
 }

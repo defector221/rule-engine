@@ -5,17 +5,16 @@ import { RuleModelRealm } from "../rule.model.realm";
 import { RuleRealm } from "../rule.realm";
 
 @Injectable()
-export class FetchMerchantSetting<R extends RuleRealm, M extends RuleModelRealm> implements IRule<R, M>{
+export class FetchZestEligibilityUsingRiskPricing<R extends RuleRealm, M extends RuleModelRealm> implements IRule<R, M>{
     constructor(private _zestAdapterMediator: ZestAdapterMediatorService){}
     
     async evaluate(iRuleType: R, iRuleDTO: M) : Promise<M>{
-        const _merchantSettigs = await this._zestAdapterMediator.getMerchantSettings(iRuleType?.getMerchantID());
-        iRuleDTO?.setMerchantSettings(_merchantSettigs);
+        //fetch Pricing Risk
         return iRuleDTO;
     }
 
     async shouldRun(iRuleType: R, iRuleDTO: M): Promise<boolean> {
-        if(iRuleType?.getMerchantID() && iRuleType?.getMerchantID().length != 0){
+        if(iRuleDTO?.getCustomerEligibilityForZest() && iRuleDTO?.getMerchantID() && iRuleDTO?.getLoanAmount()){
             return true;
         }
         return false;

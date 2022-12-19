@@ -9,12 +9,12 @@ export class CheckEligibilityForZest<R extends RuleRealm, M extends RuleModelRea
     constructor(private _zestAdapterMediator: ZestAdapterMediatorService){}
     
     async evaluate(iRuleType: R, iRuleDTO: M) : Promise<M>{
-        //write ZestEligibility
+        iRuleDTO.setCustomerEligibilityForZest(true);
         return iRuleDTO;
     }
 
     async shouldRun(iRuleType: R, iRuleDTO: M): Promise<boolean> {
-        if(iRuleDTO?.getCustomerEligibility()){
+        if(iRuleDTO?.getCustomerEligibilityForETB()){
             return false;
         }
         return true;

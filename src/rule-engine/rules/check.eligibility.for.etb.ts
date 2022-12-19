@@ -10,7 +10,7 @@ export class CheckEligibilityForETB<R extends RuleRealm, M extends RuleModelReal
     
     async evaluate(iRuleType: R, iRuleDTO: M) : Promise<M>{
         const merchantId = iRuleType.getMerchantID();
-        iRuleDTO.setCustomerEligibility(true);
+        iRuleDTO.setCustomerEligibilityForETB(true);
         return iRuleDTO;
     }
 
